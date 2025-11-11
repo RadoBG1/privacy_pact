@@ -1,0 +1,28 @@
+{
+  "name": "privacy_pact",
+  "version": "1.0.0",
+  "main": "index.js",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "npm run -w @privacy-pact/types build && npm run -w @privacy-pact/server build && npm run -w @privacy-pact/adapter-prisma build && npm run -w @privacy-pact/client build",
+    "test:all": "npm run -w @privacy-pact/server test && npm run -w @privacy-pact/adapter-prisma test && npm run -w @privacy-pact/client test && (cd examples/express-app && npm test)",
+    "test": "echo \"Run individual package tests with npm run -w <package> test\"",
+    "changeset": "changeset",
+    "version:packages": "changeset version",
+    "publish:packages": "changeset publish"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@changesets/cli": "^2.30.0",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  }
+}

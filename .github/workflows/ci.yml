@@ -1,0 +1,34 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - name: Install
+        run: npm ci
+      - name: Run package tests (server)
+        run: npm run -w @privacy-pact/server test
+      - name: Run package tests (adapter-prisma)
+        run: npm run -w @privacy-pact/adapter-prisma test
+      - name: Run package tests (client)
+        run: npm run -w @privacy-pact/client test
+      - name: Run example tests
+        run: |
+          cd examples/express-app
+          npm ci
+          npm test --silent

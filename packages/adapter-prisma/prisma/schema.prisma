@@ -1,0 +1,43 @@
+// Prisma schema for ConsentLog used by @privacy-pact/adapter-prisma
+// This is a suggested model the consumer can add to their Prisma schema.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// By default this file references DATABASE_URL from your environment.
+// For local development you can use SQLite by setting DATABASE_URL to
+// `file:./dev.db` in a `.env` file (see .env.example).
+// For local development we default to SQLite. Change `provider` and `DATABASE_URL`
+// in your `.env` for other databases (Postgres/MySQL).
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model ConsentLog {
+  id             String   @id @default(cuid())
+  userIdentifier String
+  action         String
+  categories     String   // JSON encoded array or comma-separated list; consider using Json type if supported
+  wordingVersion String
+  geoRegion      String
+  timestamp      DateTime @default(now())
+
+  @@index([userIdentifier])
+}
+
+// Optional model to record Data Subject Requests (DSR). If you add this model,
+// the Prisma adapter will attempt to write a record when `logDsrRequest` is
+// called. This helps with auditing and workflows.
+model DsrRequest {
+  id             String   @id @default(cuid())
+  userIdentifier String
+  type           String   // 'access' | 'delete'
+  status         String?  // optional status (e.g. 'requested', 'completed')
+  metadata       Json?    // optional JSON blob with extra details
+  createdAt      DateTime @default(now())
+
+  @@index([userIdentifier])
+  @@index([type])
+}

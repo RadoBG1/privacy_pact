@@ -1,0 +1,71 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+pnpm-lock.yaml
+
+# Build outputs
+dist/
+**/dist/
+build/
+coverage/
+
+# Monorepo root node_modules (if present)
+/node_modules/
+
+# TypeScript
+*.tsbuildinfo
+
+# Logs
+logs/
+*.log
+*.log.*
+
+# Environment
+.env
+.env.*
+.env.local
+.env.test
+.env.production
+
+# Editor directories and files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test
+coverage/
+.nyc_output/
+
+# Temporary files
+tmp/
+temp/
+
+# Prisma local DBs used in tests
+**/dev.db
+**/*.db
+
+# VSCode extension storage
+.history/
+
+# Others
+*.tgz
+dist-*/
+
+# Ignore local debugger and repl history
+.repl_history
+
+# Ignore generated docs site
+/site/
+
+# Ignore npm package tarballs
+*.tgz

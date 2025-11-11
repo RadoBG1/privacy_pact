@@ -1,0 +1,14 @@
+site_name: Privacy Pact
+nav:
+  - Home: index.md
+  - Packages:
+    - Adapter Prisma: adapter-prisma.md
+    - Server: server.md
+    - Client: client.md
+  - Examples: examples.md
+theme:
+  name: material
+markdown_extensions:
+  - admonition
+  - toc:
+      permalink: true

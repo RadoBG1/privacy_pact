@@ -1,0 +1,30 @@
+name: Create release PR from Changesets
+
+on:
+  push:
+    paths:
+      - '.changeset/**'
+      - 'packages/**'
+
+jobs:
+  changeset-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Create release PR (Changesets)
+        uses: changesets/action@v1
+        with:
+          # This will create a PR with version bumps and changelogs
+          github-token: ${{ secrets.GITHUB_TOKEN }}
